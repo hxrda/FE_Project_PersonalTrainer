@@ -4,8 +4,10 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 
-import Button from "@mui/material/Button";
+//import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 //import AddCustomer from "./AddCustomer";
 //import EditCustomer from "./EditCustomer";
@@ -28,20 +30,24 @@ function Trainingslist() {
 			sortable: true,
 			filter: true,
 			headerName: "Activity",
+			width: 130,
 		},
 		{
 			field: "date",
 			sortable: true,
 			filter: true,
 			headerName: "Date",
-			valueGetter: (params) =>
+			//valueGetter also works
+			valueFormatter: (params) =>
 				dayjs(params.data.date).format("DD.MM.YYYY hh:mm a"),
+			width: 200,
 		},
 		{
 			field: "duration",
 			sortable: true,
 			filter: true,
 			headerName: "Duration (min)",
+			width: 155,
 		},
 		{
 			field: "customer",
@@ -51,15 +57,24 @@ function Trainingslist() {
 			cellRenderer: (params) => {
 				return `${params.data.customer.firstname} ${params.data.customer.lastname}`;
 			},
+			width: 140,
 		},
 		{
 			cellRenderer: (params) => (
-				<Button
-					size="small"
-					//onClick={()=> deleteCustomer(params.data.links[0].href)}
-				>
+				/*
+				<Button size="small" onClick={() => deleteTraining(params.data.id)}>
 					Delete
 				</Button>
+				*/
+
+				<IconButton
+					size="small"
+					color="error"
+					aria-label="delete training"
+					onClick={() => deleteTraining(params.data.id)}
+				>
+					<DeleteIcon />
+				</IconButton>
 			),
 		},
 	]);
@@ -72,12 +87,12 @@ function Trainingslist() {
 	*/
 
 	useEffect(() => {
-		fetchCustomers();
+		fetchTrainings();
 	}, []);
 
-	const fetchCustomers = () => {
-		//
-		fetch("https://traineeapp.azurewebsites.net/gettrainings")
+	const fetchTrainings = () => {
+		//"https://traineeapp.azurewebsites.net/gettrainings"
+		fetch(import.meta.env.VITE_API_URL + "/gettrainings")
 			.then((response) => {
 				if (!response.ok)
 					throw new Error("Something went wrong: " + response.statusText);
@@ -85,6 +100,26 @@ function Trainingslist() {
 			})
 			.then((data) => setTrainings(data))
 			.catch((err) => console.error(err));
+	};
+
+	const deleteTraining = (id) => {
+		//investigate params/url using the console
+		//console.log(id);
+		if (window.confirm("Are you sure?")) {
+			//`https://traineeapp.azurewebsites.net/api/trainings/${id}`
+			fetch(import.meta.env.VITE_API_URL + `/api/trainings/${id}`, {
+				method: "DELETE",
+			})
+				.then((response) => {
+					if (!response.ok) {
+						throw new Error("Error in deletion: " + response.statusText);
+					} else {
+						setOpen(true);
+						fetchTrainings();
+					}
+				})
+				.catch((err) => console.error(err));
+		}
 	};
 
 	//Rendering:
@@ -103,7 +138,7 @@ function Trainingslist() {
 				open={open}
 				autoHideDuration={3000}
 				onClose={() => setOpen(false)}
-				message="Customer deleted succesfully"
+				message="Training deleted succesfully"
 			/>
 		</>
 	);
