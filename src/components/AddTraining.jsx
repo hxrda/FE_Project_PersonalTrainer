@@ -19,18 +19,17 @@ export default function AddTraining({ customerdata }) {
 	//States:
 	const [training, setTraining] = useState({
 		activity: "",
-		date: "", //new Date().toISOString(), //dayjs().toISOString, //type: date
+		date: Date, //new Date().toISOString(), //dayjs().toISOString, //type: date
 		duration: "", //type: int
-		customer: customerdata, //object "Customer"  -> customer.id
+		customer: customerdata, //object "Customer"  -> customer.id //referencelink
 	});
+	const [trainings, setTrainings] = useState([]);
 	const [open, setOpen] = useState(false);
 
 	//test:
-	/*
-	console.log("activity (addTraining): " + training.activity);
-	console.log("date (addTraining): " + training.date);
-	console.log("cust (addTrainig): " + training.customer);
-	*/
+	//console.log("activity (addTraining): " + training.activity);
+	//console.log("date (addTraining): " + training.date);
+	//console.log("cust (addTrainig): " + training.customer);
 
 	//Functions:
 	const handleClickOpen = () => {
@@ -53,7 +52,8 @@ export default function AddTraining({ customerdata }) {
 					throw new Error("Something went wrong: " + response.statusText);
 				return response.json();
 			})
-			.then((data) => setTraining(data))
+			//.then((data) => setTrainings(data.content))
+			.then((data) => setTrainings(data.content))
 			.catch((err) => console.error(err));
 	};
 
@@ -67,9 +67,9 @@ export default function AddTraining({ customerdata }) {
 		})
 			.then((response) => {
 				if (!response.ok)
-					throw new Error("Adding customer failed: " + response.statusText);
+					throw new Error("Adding training failed: " + response.statusText);
 
-				fetchTrainings();
+				//fetchTrainings();
 			})
 			.catch((err) => console.err(err));
 
