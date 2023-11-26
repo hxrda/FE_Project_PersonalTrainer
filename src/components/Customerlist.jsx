@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react"; //useRef/Calback-> export
 
 import { AgGridReact } from "ag-grid-react";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 
-//import Button from "@mui/material/Button";
+import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Box from "@mui/material/Box";
 
 import AddCustomer from "./AddCustomer";
 import EditCustomer from "./EditCustomer";
@@ -18,6 +19,7 @@ function Customerlist() {
 	//States:
 	const [customers, setCustomers] = useState([]);
 	const [open, setOpen] = useState(false);
+	const gridRef = useRef(); //for export button
 
 	const [columnDefs] = useState([
 		{
@@ -142,10 +144,38 @@ function Customerlist() {
 		}
 	};
 
+	const getParams = () => {
+		return {
+			//allColumns: getBoolean("allColumns"),
+			columnKeys: [
+				"firstname",
+				"lastname",
+				"email",
+				"phone",
+				"streetaddress",
+				"postcode",
+				"city",
+			],
+
+			suppressQuotes: true,
+		};
+	};
+
+	//gridRef.current.api.exportDataAsCsv(getParams());
+	const onBtnExport = useCallback(() => {
+		gridRef.current.api.exportDataAsCsv(getParams());
+	}, []);
+
 	//Rendering:
 	return (
 		<>
-			<AddCustomer fetchCustomers={fetchCustomers} />
+			<Box m={1} display="flex" justifyContent="flex-end" alignItems="flex-end">
+				<AddCustomer fetchCustomers={fetchCustomers} />
+				&nbsp;
+				<Button size="small" onClick={onBtnExport}>
+					Export
+				</Button>
+			</Box>
 			<div className="ag-theme-material" style={{ width: "90%", height: 600 }}>
 				{""}
 				<AgGridReact
@@ -153,6 +183,8 @@ function Customerlist() {
 					columnDefs={columnDefs}
 					pagination={true}
 					paginationAutoPageSize={true}
+					ref={gridRef}
+					//suppressExcelExport={true}
 				/>
 			</div>
 			<Snackbar

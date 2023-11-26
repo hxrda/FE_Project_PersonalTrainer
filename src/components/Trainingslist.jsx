@@ -57,7 +57,7 @@ function Trainingslist() {
 			cellRenderer: (params) => {
 				return `${params.data.customer.firstname} ${params.data.customer.lastname}`;
 			},
-			width: 140,
+			width: 180,
 		},
 		{
 			cellRenderer: (params) => (
@@ -76,6 +76,7 @@ function Trainingslist() {
 					<DeleteIcon />
 				</IconButton>
 			),
+			width: 50,
 		},
 	]);
 

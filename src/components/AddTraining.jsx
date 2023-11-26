@@ -26,9 +26,11 @@ export default function AddTraining({ customerdata }) {
 	const [open, setOpen] = useState(false);
 
 	//test:
+	/*
 	console.log("activity (addTraining): " + training.activity);
 	console.log("date (addTraining): " + training.date);
 	console.log("cust (addTrainig): " + training.customer);
+	*/
 
 	//Functions:
 	const handleClickOpen = () => {

@@ -6,7 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
-import Box from "@mui/material/Box";
+//import Box from "@mui/material/Box";
 
 export default function AddCustomer({ fetchCustomers }) {
 	//States:
@@ -48,10 +48,8 @@ export default function AddCustomer({ fetchCustomers }) {
 		handleClose();
 	};
 
-	//Rendering
-	return (
-		<>
-			<Box m={1} display="flex" justifyContent="flex-end" alignItems="flex-end">
+	/*
+<Box m={1} display="flex" justifyContent="flex-end" alignItems="flex-end">
 				<Button
 					variant="contained"
 					size="small"
@@ -61,6 +59,20 @@ export default function AddCustomer({ fetchCustomers }) {
 					New Customer
 				</Button>
 			</Box>
+
+	*/
+
+	//Rendering
+	return (
+		<>
+			<Button
+				variant="contained"
+				size="small"
+				startIcon={<AddIcon />}
+				onClick={handleClickOpen}
+			>
+				New Customer
+			</Button>
 
 			<Dialog open={open} onClose={handleClose}>
 				<DialogTitle>New Customer</DialogTitle>
