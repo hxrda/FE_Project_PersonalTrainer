@@ -6,7 +6,6 @@ import {
 	YAxis,
 	CartesianGrid,
 	Tooltip,
-	//Legend,
 	ResponsiveContainer,
 } from "recharts";
 import _ from "lodash";
@@ -21,7 +20,6 @@ function AppStatistics() {
 	}, []);
 
 	const fetchTrainings = () => {
-		//"https://traineeapp.azurewebsites.net/gettrainings"
 		fetch(import.meta.env.VITE_API_URL + "/api/trainings")
 			.then((response) => {
 				if (!response.ok)
@@ -32,7 +30,6 @@ function AppStatistics() {
 			.catch((err) => console.error(err));
 	};
 
-	// Process data and calculate total duration for each activity
 	const durationByActivity = () => {
 		const activityData = _.groupBy(trainings, "activity");
 
@@ -70,5 +67,3 @@ function AppStatistics() {
 }
 
 export default AppStatistics;
-
-//<Legend />

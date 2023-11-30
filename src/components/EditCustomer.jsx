@@ -8,9 +8,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 
-//import AddIcon from "@mui/icons-material/Add";
-//import Box from "@mui/material/Box";
-
 export default function EditCustomer({ customerdata, fetchCustomers }) {
 	//States:
 	const [customer, setCustomer] = useState({
@@ -26,7 +23,6 @@ export default function EditCustomer({ customerdata, fetchCustomers }) {
 
 	//Functions:
 	const handleClickOpen = () => {
-		//console.log(customerdata);
 		setCustomer({
 			firstname: customer.firstname,
 			lastname: customer.lastname,
@@ -44,7 +40,6 @@ export default function EditCustomer({ customerdata, fetchCustomers }) {
 	};
 
 	const handleSave = () => {
-		//incl validation handling?
 		fetch(customerdata.links[0].href, {
 			method: "PUT",
 			headers: { "Content-type": "application/json" },
@@ -153,10 +148,3 @@ export default function EditCustomer({ customerdata, fetchCustomers }) {
 		</>
 	);
 }
-
-/*
-    <Button size="small" onClick={handleClickOpen}>
-				Edit
-	</Button>
-
-*/

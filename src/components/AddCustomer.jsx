@@ -6,7 +6,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
-//import Box from "@mui/material/Box";
 
 export default function AddCustomer({ fetchCustomers }) {
 	//States:
@@ -31,7 +30,6 @@ export default function AddCustomer({ fetchCustomers }) {
 	};
 
 	const handleSave = () => {
-		//incl validation handling?
 		fetch(import.meta.env.VITE_API_URL + "/api/customers", {
 			method: "POST",
 			headers: { "Content-type": "application/json" },
@@ -47,20 +45,6 @@ export default function AddCustomer({ fetchCustomers }) {
 
 		handleClose();
 	};
-
-	/*
-<Box m={1} display="flex" justifyContent="flex-end" alignItems="flex-end">
-				<Button
-					variant="contained"
-					size="small"
-					startIcon={<AddIcon />}
-					onClick={handleClickOpen}
-				>
-					New Customer
-				</Button>
-			</Box>
-
-	*/
 
 	//Rendering
 	return (

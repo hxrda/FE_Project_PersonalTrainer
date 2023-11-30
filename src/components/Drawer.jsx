@@ -1,16 +1,14 @@
 import React from "react";
-//import { withRouter } from "react-router-dom";
 import { Link, Outlet } from "react-router-dom";
 
 import Drawer from "@mui/material/Drawer";
 
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-//import Drawer from '@mui/material/Drawer';
+
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-//import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -24,8 +22,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
-//import InboxIcon from "@mui/icons-material/MoveToInbox";
-//import MailIcon from "@mui/icons-material/Mail";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import EventIcon from "@mui/icons-material/Event";
@@ -73,13 +69,11 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 	display: "flex",
 	alignItems: "center",
 	padding: theme.spacing(0, 1),
-	// necessary for content to be below app bar
 	...theme.mixins.toolbar,
 	justifyContent: "flex-end",
 }));
 
 function PersistentDrawerLeft() {
-	//console.log(history);  //^requires props in ()
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
 
@@ -169,31 +163,3 @@ function PersistentDrawerLeft() {
 	);
 }
 export default PersistentDrawerLeft;
-
-/*
-	return (
-							<ListItem key={index} disablePadding>
-								<Link
-									to={link}
-									style={{ color: "inherit", textDecoration: "inherit" }}
-								>
-									<ListItemButton>
-										<ListItemIcon>{icon}</ListItemIcon>
-										<ListItemText primary={text} />
-									</ListItemButton>
-								</Link>
-							</ListItem>
-						);
-*/
-/*
-const Drawer = () => {
-    //Variables & Functions
-    
-	return (
-		<MUIDrawer>
-			<></>
-		</MUIDrawer>
-	);
-};
-
-*/

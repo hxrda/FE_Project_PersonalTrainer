@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react"; //useRef/Calback-> export
+import { useState, useEffect, useRef, useCallback } from "react";
 
 import { AgGridReact } from "ag-grid-react";
 
@@ -19,7 +19,7 @@ function Customerlist() {
 	//States:
 	const [customers, setCustomers] = useState([]);
 	const [open, setOpen] = useState(false);
-	const gridRef = useRef(); //for export button
+	const gridRef = useRef();
 
 	const [columnDefs] = useState([
 		{
@@ -73,10 +73,7 @@ function Customerlist() {
 		},
 		{
 			cellRenderer: (params) => (
-				<AddTraining
-					customerdata={params.data.links[0].href}
-					//fetchCustomers={fetchCustomers}
-				/>
+				<AddTraining customerdata={params.data.links[0].href} />
 			),
 			width: 50,
 		},
@@ -91,12 +88,6 @@ function Customerlist() {
 		},
 		{
 			cellRenderer: (params) => (
-				/*
-            <Button
-				size="small"
-				onClick={handleClickOpen}
-			>
-				*/
 				<IconButton
 					size="small"
 					color="error"
@@ -116,7 +107,6 @@ function Customerlist() {
 	}, []);
 
 	const fetchCustomers = () => {
-		//"https://traineeapp.azurewebsites.net/api/customers"
 		fetch(import.meta.env.VITE_API_URL + "/api/customers")
 			.then((response) => {
 				if (!response.ok)
@@ -128,8 +118,6 @@ function Customerlist() {
 	};
 
 	const deleteCustomer = (url) => {
-		//investigate params/url using the console
-		//console.log(url);
 		if (window.confirm("Are you sure?")) {
 			fetch(url, { method: "DELETE" })
 				.then((response) => {
@@ -146,7 +134,6 @@ function Customerlist() {
 
 	const getParams = () => {
 		return {
-			//allColumns: getBoolean("allColumns"),
 			columnKeys: [
 				"firstname",
 				"lastname",
@@ -161,7 +148,6 @@ function Customerlist() {
 		};
 	};
 
-	//gridRef.current.api.exportDataAsCsv(getParams());
 	const onBtnExport = useCallback(() => {
 		gridRef.current.api.exportDataAsCsv(getParams());
 	}, []);
@@ -184,7 +170,6 @@ function Customerlist() {
 					pagination={true}
 					paginationAutoPageSize={true}
 					ref={gridRef}
-					//suppressExcelExport={true}
 				/>
 			</div>
 			<Snackbar
