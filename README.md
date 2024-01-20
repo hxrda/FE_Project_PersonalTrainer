@@ -1,3 +1,7 @@
+# Deployed to the cloud at:
+
+https://harmonious-blini-3fe1a8.netlify.app/ 
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
